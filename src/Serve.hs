@@ -1,7 +1,7 @@
--- udp server
+-- scim server
 
-module Main (
-    main
+module Serve (
+    serve
 ) where
 
 import Data.Bits
@@ -15,7 +15,8 @@ import qualified Data.ByteString as B (ByteString)
 import Data.Word
 
 import Handler (HandlerFunc)
-import Handler.ScimHandler (scimHandler)
+import Handler.Scim.Auth
+import Handler.Repeat
 import ByteStringTools
 
 serve :: String -> HandlerFunc -> IO ()
@@ -28,18 +29,7 @@ serve port handlerFunc = withSocketsDo $ do
     sock <- socket (addrFamily serveraddr) Datagram defaultProtocol
     bindSocket sock (addrAddress serveraddr)
     handleConnections sock
-
-    where handleConnections sock = do
-            (pkt, addr) <- recvFrom sock 1024
-            forkIO $ handlerFunc sock addr (strictToLazyBS pkt) (stripScimHeader (strictToLazyBS pkt))
+  where handleConnections sock = do
+            (pkt, addr) <- recvFrom sock 4096
+            forkIO $ handlerFunc sock addr (strictToLazyBS pkt)
             handleConnections sock
-          stripScimHeader :: L.ByteString -> [Word8]
-          stripScimHeader pkt = L.unpack (L.take 2 pkt)
-
-repeatHandler :: HandlerFunc
-repeatHandler sock addr pkt header = do
-    putStrLn ("From " ++ show addr ++ ": " ++ show (lazyToStrictBS pkt))
-    sendAllTo sock (lazyToStrictBS pkt) addr
-
-main = do
-    serve "13572" scimHandler

@@ -6,4 +6,4 @@ import Network.Socket
 import qualified Data.ByteString.Lazy as L (ByteString, pack, unpack, take, toChunks, fromChunks)
 import Data.Word
 
-type HandlerFunc = Socket -> SockAddr -> L.ByteString -> [Word8] -> IO ()
+type HandlerFunc = Socket -> SockAddr -> L.ByteString -> IO ()

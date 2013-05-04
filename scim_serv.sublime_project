@@ -1,0 +1,22 @@
+{
+
+"folders":
+[
+	{
+		"path": ".",
+		"name": "scim_serv",
+		"file_exclude_patterns":
+		[
+			"*.gitignore",
+			"*.gitmodules"
+		],
+		"folder_exclude_patterns":
+		[
+			"build",
+			"dist",
+			".git"
+		]
+	}
+]
+
+}
