@@ -12,9 +12,23 @@
 		],
 		"folder_exclude_patterns":
 		[
-			"build",
 			"dist",
 			".git"
+		]
+	}
+],
+"build_systems":
+[
+	{
+		"name": "cabal",
+		"cmd": ["cabal", "build"],
+		"working_dir": "${project_path}",
+		"variants":
+		[
+			{
+				"name": "clean",
+				"cmd": ["cabal", "clean"]
+			}
 		]
 	}
 ]

@@ -3,6 +3,7 @@ module Handler.Scim.Portal (
 ) where
 
 import Handler
+import Handler.Repeat
 
 scimPortalHandler :: HandlerFunc
-scimPortalHandler = undefined
+scimPortalHandler = repeatHandler

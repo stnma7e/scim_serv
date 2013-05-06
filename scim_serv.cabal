@@ -17,7 +17,7 @@ cabal-version:       >=1.8
 library
   exposed-modules:     Serve, Handler, ByteStringTools, Handler.Repeat, Handler.Scim.Auth, Handler.Scim.Portal
   -- other-modules:       
-  build-depends:       base ==4.6.*, network ==2.4.*, bytestring ==0.10.*, HDBC ==2.3.*, HDBC-postgresql ==2.3.*
+  build-depends:       base ==4.6.*, network ==2.4.*, bytestring ==0.10.*, HDBC ==2.3.*, HDBC-postgresql ==2.3.*, binary ==0.5.*
   hs-source-dirs:      src
 executable auth
   build-depends:       base ==4.6.*, Scim
